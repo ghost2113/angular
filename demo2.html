@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<script src = "js/jquery-1.11.0.js"></script> 
+		<script src="js/bootstrap.js"></script>
+	</head>
+
+	<body ng-controller="myCtrl">
+		<div class="btn-group" ng-repeat = "provice in provices">
+		  <button type="button" class="btn btn-danger">{{ provice.name}}</button>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+		    <span class="caret"></span>
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		    <li ng-repeat = "city in provice.cities"><a href="#">{{ city.name }}</a></li>
+		  </ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/angular.js" charset="utf-8"></script>
+	<script>
+		var app = angular.module("myApp", [])
+		app.controller("myCtrl", function($scope) {
+			var provices = [{
+				"name": "浙江",
+				cities: [{
+					"name": "温州"
+				}, {
+					"name": "宁波"
+				}, {
+					"name": "余杭"
+				}, ]
+			}, {
+				"name": "河南",
+				cities: [{
+					"name": "温州"
+				}, {
+					"name": "宁波"
+				}, {
+					"name": "余杭"
+				}, ]
+			}, {
+				"name": "江苏",
+				cities: [{
+					"name": "南京"
+				}, {
+					"name": "徐州"
+				}, {
+					"name": "德州"
+				}, ]
+			}]
+			$scope.provices = provices;
+		})
+	</script>
+
+</html>

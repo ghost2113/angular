@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<script src = "js/jquery-1.11.0.js"></script> 
+		<script src="js/bootstrap.js"></script>
+	</head>
+
+	<body ng-controller="myCtrl">
+		<table class="table table-bordered table-striped table-hover">
+			<theader>
+				<td>num</td>
+				<td>firstName</td>
+				<td>lastName</td>
+				<td>gender</td>
+				<td>likeNum</td>
+				<td>unLikeNum</td>
+				<td>likeBtn</td>
+				<td>unLikeBtn</td>
+			</theader>
+			<tbody>
+				<tr ng-repeat = "user in users">
+					<td>{{$index + 1 }}</td>
+					<td>{{user.firstName}}</td>
+					<td>{{user.lastName}}</td>
+					<td>{{user.gender}}</td>
+					<td>{{user.likeNum}}</td>
+					<td>{{user.unLikeNum}}</td>
+					<td><button class="btn btn-success btn-xs" ng-click="countLikeNum(user,$index)">喜欢</button></td>
+					<td><button class="btn btn-danger btn-xs" ng-click="countUnLikeNum(user,$index)">不喜欢</button></td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</body>	
+	<script type="text/javascript" src="js/angular.js" charset="utf-8"></script>
+	<script>
+		var app = angular.module("myApp", [])
+		app.controller("myCtrl", function($scope) {
+			var users = [
+				{
+					"firstName":"FanG",
+					"lastName":"vane",
+					"gender":"male",
+					"likeNum":0,
+					"unLikeNum":0,
+					"salary":10000,
+					"birthday":new Date('1998-01-01')
+				},
+				{
+					"firstName":"Sara",
+					"lastName":"rose",
+					"gender":"female",
+					"likeNum":0,
+					"unLikeNum":0,
+					"salary":20000,
+					"birthday":new Date('1998-01-01')
+				},
+				{
+					"firstName":"Mark",
+					"lastName":"bear",
+					"gender":"male",
+					"likeNum":0,
+					"unLikeNum":0,
+					"salary":30000,
+					"birthday":new Date('1998-01-01')
+				},
+				{
+					"firstName":"Pam",
+					"lastName":"hot",
+					"gender":"male",
+					"likeNum":0,
+					"unLikeNum":0,
+					"salary":40000,
+					"birthday":new Date('1998-01-01')
+				},
+				{
+					"firstName":"Wang",
+					"lastName":"lao",
+					"gender":"male",
+					"likeNum":0,
+					"unLikeNum":0,
+					"salary":1000,
+					"birthday":new Date('1998-01-01')
+				}
+			];
+			if(localStorage.getItem("users")){
+				$scope.users = JSON.parse(localStorage.getItem("users"))
+			}else{
+				$scope.users = users
+			}
+			$scope.countLikeNum = function (user){
+				user.likeNum++;
+				localStorage.setItem("users",JSON.stringify($scope.users))
+			}
+			$scope.countUnLikeNum = function (user){
+				user.unLikeNum++;
+				localStorage.setItem("users",JSON.stringify($scope.users))
+			}
+		})
+	</script>
+
+</html>
